@@ -13,10 +13,10 @@ public class ReadExcel {
     readExcel是什么方法？成员方法
      */
     public User[] readExcel(File file) {
-        User users[] = null;
+        User[] users = null;
         try {
             XSSFWorkbook xw = new XSSFWorkbook(new FileInputStream(file));
-            XSSFSheet xs = xw.getSheetAt(0);
+            XSSFSheet xs = xw.getSheetAt(0);//获取第0个表
             users = new User[xs.getLastRowNum()];
             for (int j = 1; j <= xs.getLastRowNum(); j++) {
                 XSSFRow row = xs.getRow(j);
