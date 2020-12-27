@@ -5,49 +5,47 @@ import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-public class ReadExcel {
+public class ReadProduct {
     /*
     readExcel是什么方法？成员方法
      */
-    public User[] readExcel(InputStream in) {
-        User[] users = null;
+    public Product[] readExcel(InputStream in) {
+        Product[] products = null;
         try {
             XSSFWorkbook xw = new XSSFWorkbook(in);
             XSSFSheet xs = xw.getSheetAt(0);//获取第0个表
-            users = new User[xs.getLastRowNum()];
+            products = new Product[xs.getLastRowNum()];
             for (int j = 1; j <= xs.getLastRowNum(); j++) {
                 XSSFRow row = xs.getRow(j);
-                User user = new User();
+                Product product = new Product();
                 for (int k = 0; k <= row.getLastCellNum(); k++) {
                     XSSFCell cell = row.getCell(k);
                     if (cell == null)
                         continue;
                     if (k == 0) {
-                        user.setUsername(this.getValue(cell));
+                        product.setId(this.getValue(cell));
                     } else if (k == 1) {
-                        user.setPassword(this.getValue(cell));
+                        product.setName(this.getValue(cell));
                     } else if (k == 2) {
-                        user.setAddress(this.getValue(cell));
+                        product.setPrice(Float.parseFloat(this.getValue(cell)));
                     } else if (k == 3) {
-                        user.setPhone(this.getValue(cell));
+                        product.setDescr(this.getValue(cell));
                     }
                 }
-                users[j-1]=user;
+                products[j-1]=product;
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return users;
+        return products;
     }
 
     private String getValue(XSSFCell cell) {
         String value;
-        CellType type = cell.getCellTypeEnum();
+        CellType type = cell.getCellType();
 
         switch (type) {
             case STRING:

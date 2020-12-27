@@ -1,4 +1,3 @@
-import java.io.File;
 import java.io.InputStream;
 import java.util.Scanner;
 
@@ -8,9 +7,12 @@ public class Main {
      */
     public static void main(String[] args) {
         //File file=new File("D:\\IntelliJ IDEA 2019.2.4\\myFirstGithubProject\\src\\user.xlsx");//实际项目不是这样设置路径
-        InputStream in=Main.class.getResourceAsStream("/user.xlsx");//读取本项目中的文件指定文件路径
-        ReadExcel readExcel=new ReadExcel();
-        User[] users=readExcel.readExcel(in);
+        InputStream u=Main.class.getResourceAsStream("/user.xlsx");//读取本项目中的文件指定文件路径
+        InputStream p=Main.class.getResourceAsStream("/product.xlsx");
+        ReadUser readExcel=new ReadUser();
+        ReadProduct readProduct=new ReadProduct();
+        Product[] products=readProduct.readExcel(p);
+        User[] users=readExcel.readExcel(u);
         boolean bool=true;
         while(bool) {
             System.out.println("请输入用户名：");
@@ -27,5 +29,11 @@ public class Main {
             }
             if(bool) System.out.println("用户名或密码错误");
         }
+        for(Product pro:products){
+            System.out.println(pro.toString());
+        }
+    }
+    public static void testUser(){
+
     }
 }
