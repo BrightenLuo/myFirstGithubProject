@@ -1,4 +1,5 @@
 import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -7,15 +8,16 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 
 public class ReadExcel {
     /*
     readExcel是什么方法？成员方法
      */
-    public User[] readExcel(File file) {
+    public User[] readExcel(InputStream in) {
         User[] users = null;
         try {
-            XSSFWorkbook xw = new XSSFWorkbook(new FileInputStream(file));
+            XSSFWorkbook xw = new XSSFWorkbook(in);
             XSSFSheet xs = xw.getSheetAt(0);//获取第0个表
             users = new User[xs.getLastRowNum()];
             for (int j = 1; j <= xs.getLastRowNum(); j++) {
@@ -58,7 +60,9 @@ public class ReadExcel {
                 value = cell.getBooleanCellValue() + "";
                 break;
             case NUMERIC:
-                value = cell.getNumericCellValue() + "";
+                DataFormatter formatter = new DataFormatter();
+                value = formatter.formatCellValue(cell);//把数字类型转换为字符串类型
+                //value = cell.getNumericCellValue() + "";//非字符串类型和一个空字符相连，最终类型是String
                 break;
             case FORMULA:
                 value = cell.getCellFormula();
