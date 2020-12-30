@@ -10,16 +10,17 @@ public class Test {
     static Product[] carts = new Product[3];//购物车
     static int count = 0;//购物车数量
     static String currentUser;//当前用户
-    static String flag;//用于选择判断
-    static User[] users=null;
+    static User[] users=null;//获取系统存储的用户信息
     static Order[] orders=new Order[3];//订单表
 
     //类的静态方法只能使用类的静态成员变量，而不能使用非静态成员变量
 
+    //主函数，程序执行入口
     public static void main(String[] args) {
         testUser();//验证用户名密码
         readProduction();//浏览商品
     }
+
 
     //验证用户名和密码
     public static void testUser() {
@@ -57,7 +58,7 @@ public class Test {
             }
             System.out.println("请选择商品，输入商品id，即可把该商品加入购物车,输入exit结束选购");
             while (!sc.hasNext("exit")) {
-                flag = sc.nextLine();
+                String flag = sc.nextLine();
                 for (int i = 0; i < products.length; i++) {
                     if (flag.equals(products[i].getId()))
                         carts[count++] = products[i];
@@ -102,6 +103,15 @@ public class Test {
             System.out.println("下单成功！您的订单如下");
             for(int i=0;i<count;i++){
                 System.out.println(orders[i].toString());
+            }
+            System.out.println("是否确认支付？(yes or not)");
+            if(sc.nextLine().equals("yes")){
+                OutOrderToExcel outOrderToExcel=new OutOrderToExcel();
+                outOrderToExcel.createOrder(orders,count);
+            }
+            else{
+                System.out.println("请在15分钟内支付订单，否则订单自动作废！");
+                sc.nextLine();
             }
             System.out.println("是否还想继续浏览商品或者继续购买商品(yes or no)");
             if(sc.nextLine().equals("no")){

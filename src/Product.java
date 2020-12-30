@@ -8,9 +8,9 @@ public class Product {
     public String toString() {
         return "Product{" +
                 "id='" + id + '\'' +
-                "\t name='" + name + '\'' +
-                "\t price=" + price +
-                "\t descr='" + descr + '\'' +
+                ", name='" + name + '\'' +
+                ", price=" + price +
+                ", descr='" + descr + '\'' +
                 '}';
     }
 
