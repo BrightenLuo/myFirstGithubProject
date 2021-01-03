@@ -13,7 +13,7 @@ public class Test {
     static User[] users=null;//获取系统存储的用户信息
     static Order[] orders=new Order[3];//订单表
 
-    //类的静态方法只能使用类的静态成员变量，而不能使用非静态成员变量
+    //注:类的静态方法只能使用类的静态成员变量，而不能使用非静态成员变量
 
     //主函数，程序执行入口
     public static void main(String[] args) {
