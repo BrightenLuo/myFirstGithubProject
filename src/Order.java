@@ -1,10 +1,12 @@
+import java.util.Date;
+
 public class Order {
     private String orderId;
-    private String userName;
-    private String userPhone;
-    private String userAddress;
-    private float productPrice;
-    private String productName;
+    private User user;
+    private Product product;
+    private int shopCount;//购买数量
+    private float finalPrice;
+    private Date createDate;
 
     public String getOrderId() {
         return orderId;
@@ -14,55 +16,44 @@ public class Order {
         this.orderId = orderId;
     }
 
-    public String getUserName() {
-        return userName;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public String getUserPhone() {
-        return userPhone;
+    public Product getProduct() {
+        return product;
     }
 
-    public void setUserPhone(String userPhone) {
-        this.userPhone = userPhone;
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
-    public String getUserAddress() {
-        return userAddress;
+    public int getShopCount() {
+        return shopCount;
     }
 
-    public void setUserAddress(String userAddress) {
-        this.userAddress = userAddress;
+    public void setShopCount(int shopCount) {
+        this.shopCount = shopCount;
     }
 
-    public float getProductPrice() {
-        return productPrice;
+    public float getFinalPrice() {
+        return finalPrice;
     }
 
-    public void setProductPrice(float productPrice) {
-        this.productPrice = productPrice;
+    public void setFinalPrice(float finalPrice) {
+        this.finalPrice = finalPrice;
     }
 
-    public String getProductName() {
-        return productName;
+    public Date getCreateDate() {
+        return createDate;
     }
 
-    public void setProductName(String productName) {
-        this.productName = productName;
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
     }
 
-    @Override
-    public String toString() {
-        return "Order{" +
-                "orderId='" + orderId + '\'' +
-                ", userName='" + userName + '\'' +
-                ", userPhone='" + userPhone + '\'' +
-                ", userAddress='" + userAddress + '\'' +
-                ", productPrice=" + productPrice +
-                ", productName='" + productName + '\'' +
-                '}';
-    }
 }

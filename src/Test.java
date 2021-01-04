@@ -1,4 +1,5 @@
 import java.io.InputStream;
+import java.util.Date;
 import java.util.Scanner;
 
 public class Test {
@@ -7,11 +8,12 @@ public class Test {
      */
     static Scanner sc = new Scanner(System.in);//用于全局从键盘读入
 
-    static Product[] carts = new Product[3];//购物车
-    static int count = 0;//购物车数量
-    static String currentUser;//当前用户
+    static Product[] carts = new Product[10];//购物车
+    static int count = 0;//购物车商品数量
+    static String username;//当前用户
     static User[] users=null;//获取系统存储的用户信息
-    static Order[] orders=new Order[3];//订单表
+    static Order[] orders=new Order[10];//订单表
+    static int[] shopCounts=new int[10];//获取购物车中某一个商品的购买数量
 
     //注:类的静态方法只能使用类的静态成员变量，而不能使用非静态成员变量
 
@@ -31,13 +33,12 @@ public class Test {
         boolean bool = true;
         while (bool) {
             System.out.println("请输入用户名：");
-            String username = sc.nextLine();
+            username = sc.nextLine();
             System.out.println("请输入密码:");
             String password = sc.nextLine();
             for (User user : users) {
                 if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
                     System.out.println("欢迎回来，"+user.getUsername());
-                    currentUser=user.getUsername();
                     bool = false;
                     break;
                 }
@@ -54,20 +55,25 @@ public class Test {
         while(true) {
             System.out.println("可供购买的商品如下:");
             for (Product pro : products) {
-                System.out.println(pro.toString());
+                System.out.print(pro.toString());
+                System.out.println("}");
             }
-            System.out.println("请选择商品，输入商品id，即可把该商品加入购物车,输入exit结束选购");
+            System.out.println("请选择商品，输入商品id，即可把该商品加入购物车,并输入想要购买该商品的数量,输入exit结束选购");
             while (!sc.hasNext("exit")) {
                 String flag = sc.nextLine();
+                int c=sc.nextInt();
                 for (int i = 0; i < products.length; i++) {
-                    if (flag.equals(products[i].getId()))
+                    if (flag.equals(products[i].getId())){
+                        shopCounts[count]=c;
                         carts[count++] = products[i];
+                    }
+
                 }
             }
             sc.nextLine();//缓冲掉退出循环的exit输入
             System.out.println("是否立即查看您的购物车(yes or no)");
             if (sc.nextLine().equals("yes")) {
-                createOreder();
+                createOrder();
                 continue;
             } else if (sc.nextLine().equals("no")) {
                 System.out.println("Would you like continue to browse products or exit system?(Type browse or exit)");
@@ -80,10 +86,11 @@ public class Test {
     }
 
     //下订单
-    public static void createOreder(){
+    public static void createOrder(){
         System.out.println("您的购物车商品如下:");
         for (int i=0;i<count;i++) {
-            System.out.println(carts[i].toString());
+            System.out.print(carts[i].toString());
+            System.out.println("\t"+"数量"+" "+shopCounts[i]+'}');
         }
         System.out.println("是否想要下订单:(是输入yes，否输入no)");
         if(sc.nextLine().equals("yes")){
@@ -91,18 +98,19 @@ public class Test {
                 orders[i]=new Order();
                 orders[i].setOrderId("000"+(i+1));
                 for(User usr:users){
-                    if(usr.getUsername().equals(currentUser)){
-                        orders[i].setUserName(usr.getUsername());
-                        orders[i].setUserPhone(usr.getPhone());
-                        orders[i].setUserAddress(usr.getAddress());
+                    if(usr.getUsername().equals(username)){
+                        orders[i].setUser(usr);
                     }
                 }
-                orders[i].setProductPrice(carts[i].getPrice());
-                orders[i].setProductName(carts[i].getName());
+                orders[i].setProduct(carts[i]);
+                orders[i].setShopCount(shopCounts[i]);
+                orders[i].setFinalPrice(carts[i].getPrice()*shopCounts[i]);
+                orders[i].setCreateDate(new Date());
             }
             System.out.println("下单成功！您的订单如下");
             for(int i=0;i<count;i++){
-                System.out.println(orders[i].toString());
+                System.out.print(orders[i].toString());
+                System.out.println("\t"+"数量"+" "+shopCounts[i]+'}');
             }
             System.out.println("是否确认支付？(yes or not)");
             if(sc.nextLine().equals("yes")){

@@ -10,8 +10,7 @@ public class Product {
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", price=" + price +
-                ", descr='" + descr + '\'' +
-                '}';
+                ", descr='" + descr + '\'' ;
     }
 
     public String getId() {
