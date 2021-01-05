@@ -55,16 +55,15 @@ public class Test {
         while(true) {
             System.out.println("可供购买的商品如下:");
             for (Product pro : products) {
+                System.out.print("product{");
                 System.out.print(pro.toString());
                 System.out.println("}");
             }
-            System.out.println("请选择商品，输入商品id，即可把该商品加入购物车,并输入想要购买该商品的数量,输入exit结束选购");
+            System.out.println("请选择商品，输入商品id，即可把该商品加入购物车,输入exit结束选购");
             while (!sc.hasNext("exit")) {
                 String flag = sc.nextLine();
-                int c=sc.nextInt();
                 for (int i = 0; i < products.length; i++) {
                     if (flag.equals(products[i].getId())){
-                        shopCounts[count]=c;
                         carts[count++] = products[i];
                     }
 
@@ -89,11 +88,16 @@ public class Test {
     public static void createOrder(){
         System.out.println("您的购物车商品如下:");
         for (int i=0;i<count;i++) {
+            System.out.print("product{");
             System.out.print(carts[i].toString());
-            System.out.println("\t"+"数量"+" "+shopCounts[i]+'}');
+            System.out.println('}');
         }
         System.out.println("是否想要下订单:(是输入yes，否输入no)");
         if(sc.nextLine().equals("yes")){
+            System.out.println("请输入想要购买的对应商品数量:");
+            for(int i=0;i<count;i++)
+                shopCounts[i]=sc.nextInt();
+            sc.nextLine();//缓冲for循环后的键盘输入
             for(int i=0;i<count;i++){
                 orders[i]=new Order();
                 orders[i].setOrderId("000"+(i+1));
@@ -109,8 +113,7 @@ public class Test {
             }
             System.out.println("下单成功！您的订单如下");
             for(int i=0;i<count;i++){
-                System.out.print(orders[i].toString());
-                System.out.println("\t"+"数量"+" "+shopCounts[i]+'}');
+                System.out.println(orders[i].toString());
             }
             System.out.println("是否确认支付？(yes or not)");
             if(sc.nextLine().equals("yes")){

@@ -35,4 +35,11 @@ public class User {
     public void setPhone(String phone) {
         this.phone = phone;
     }
+
+    @Override
+    public String toString() {
+        return "username='" + username + '\'' +
+                ", phone='" + phone + '\'' +
+                ", address='" + address + '\'' ;
+    }
 }

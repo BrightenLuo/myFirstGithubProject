@@ -21,7 +21,7 @@ public class OutOrderToExcel {
                     if(j==1)
                         cell.setCellValue(orders[i].getUser().getUsername());
                     if(j==2)
-                        cell.setCellValue(orders[i].getUser().getPassword());
+                        cell.setCellValue(orders[i].getUser().getPhone());
                     if(j==3)
                         cell.setCellValue(orders[i].getUser().getAddress());
                     if(j==4)

@@ -6,11 +6,10 @@ public class Product {
 
     @Override
     public String toString() {
-        return "Product{" +
-                "id='" + id + '\'' +
-                ", name='" + name + '\'' +
-                ", price=" + price +
-                ", descr='" + descr + '\'' ;
+        return "productId='" + id + '\'' +
+                ", productName='" + name + '\'' +
+                ", productPrice=" + price +
+                ", productDescr='" + descr + '\'' ;
     }
 
     public String getId() {

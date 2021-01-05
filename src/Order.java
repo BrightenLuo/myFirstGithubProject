@@ -56,4 +56,15 @@ public class Order {
         this.createDate = createDate;
     }
 
+    @Override
+    public String toString() {
+        return "Order{" +
+                "orderId='" + orderId + '\'' +","+
+                 user.toString() +","+
+                 product.toString() +
+                ", shopCount=" + shopCount +
+                ", finalPrice=" + finalPrice +
+                ", createDate=" + createDate +
+                '}';
+    }
 }
