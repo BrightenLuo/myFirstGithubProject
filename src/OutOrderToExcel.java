@@ -12,8 +12,14 @@ public class OutOrderToExcel {
         try {
             XSSFWorkbook workbook = new XSSFWorkbook();
             XSSFSheet sheet = workbook.createSheet("Order");
+            String[] firstRowData={"用户id","用户名","手机号","地址","商品id","商品名","商品描述","商品单价","购买数量","总价","创建时间"};
+            XSSFRow firstRow=sheet.createRow((short)0);
+            for(int i=0;i<11;i++){
+                XSSFCell cell=firstRow.createCell((short)i);
+                cell.setCellValue(firstRowData[i]);
+            }
             for(int i=0;i<count;i++){
-                XSSFRow row=sheet.createRow((short)i);
+                XSSFRow row=sheet.createRow((short)i+1);
                 for(int j=0;j<11;j++){
                     XSSFCell cell=row.createCell((short)j);
                     if(j==0)
