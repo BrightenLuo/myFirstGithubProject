@@ -3,11 +3,13 @@ import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import java.io.File;
 import java.io.FileOutputStream;
 
 public class OutOrderToExcel {
 
-    public static String outputFile = "D:\\IntelliJ IDEA 2019.2.4\\myFirstGithubProject\\src\\order.xlsx";
+    //public static String outputFile = "D:\\IntelliJ IDEA 2019.2.4\\myFirstGithubProject\\src\\order.xlsx";在实际项目中这种输出指定路径的方式移植性很差
+    public static String outputFile=System.getProperty("user.dir")+ File.separator+"order.xlsx";//在项目的home下生成order.xlsx文件
     public void createOrder(Order[] orders, int count ) {
         try {
             XSSFWorkbook workbook = new XSSFWorkbook();
@@ -43,7 +45,7 @@ public class OutOrderToExcel {
                     if(j==9)
                         cell.setCellValue(orders[i].getFinalPrice());
                     if(j==10)
-                        cell.setCellValue(orders[i].getCreateDate());
+                        cell.setCellValue(orders[i].getCreateDate().toString());
                 }
             }
 
