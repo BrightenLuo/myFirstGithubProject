@@ -27,7 +27,7 @@ public class Test {
     //验证用户名和密码
     public static void testUser() {
         //File file=new File("D:\\IntelliJ IDEA 2019.2.4\\myFirstGithubProject\\src\\user.xlsx");//实际项目不是这样设置路径
-        InputStream u = Test.class.getResourceAsStream("/user.xlsx");//在所指定类文件所在的目录下寻找user.xlsx文件
+        InputStream u = Test.class.getResourceAsStream("/user.xlsx");//在编译输出的class目录中寻找user.xlsx,即classpath
         ReadUser readExcel = new ReadUser();
         users = readExcel.readExcel(u);
         boolean bool = true;
@@ -49,7 +49,7 @@ public class Test {
 
     //读取和显示商品
     public static void readProduction() {
-        InputStream p = Test.class.getResourceAsStream("/product.xlsx");//在指定类文件的目录下寻找product.xlsx文件
+        InputStream p = Test.class.getResourceAsStream("/product.xlsx");//在编译输出的class目录中寻找product.xlsx,即classpath
         ReadProduct readProduct = new ReadProduct();
         Product[] products = readProduct.readExcel(p);
         while(true) {
