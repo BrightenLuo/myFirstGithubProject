@@ -27,7 +27,7 @@ public class Test {
     //验证用户名和密码
     public static void testUser() {
         //File file=new File("D:\\IntelliJ IDEA 2019.2.4\\myFirstGithubProject\\src\\user.xlsx");//实际项目不是这样设置路径
-        InputStream u = Test.class.getResourceAsStream("/user.xlsx");//读取本项目中的文件指定文件路径
+        InputStream u = Test.class.getResourceAsStream("/user.xlsx");//在所指定类文件所在的目录下寻找user.xlsx文件
         ReadUser readExcel = new ReadUser();
         users = readExcel.readExcel(u);
         boolean bool = true;
@@ -49,7 +49,7 @@ public class Test {
 
     //读取和显示商品
     public static void readProduction() {
-        InputStream p = Test.class.getResourceAsStream("/product.xlsx");
+        InputStream p = Test.class.getResourceAsStream("/product.xlsx");//在指定类文件的目录下寻找product.xlsx文件
         ReadProduct readProduct = new ReadProduct();
         Product[] products = readProduct.readExcel(p);
         while(true) {
@@ -72,7 +72,7 @@ public class Test {
             sc.nextLine();//缓冲掉退出循环的exit输入
             System.out.println("是否立即查看您的购物车(yes or no)");
             if (sc.nextLine().equals("yes")) {
-                createOrder();
+                createOrder();//查看购物车并下订单
                 continue;
             } else if (sc.nextLine().equals("no")) {
                 System.out.println("Would you like continue to browse products or exit system?(Type browse or exit)");
